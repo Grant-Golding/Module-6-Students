@@ -1,0 +1,50 @@
+package Module6;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+
+public class Studentlist {
+    public static void main(String[] args) {
+        ArrayList<Student> students = new ArrayList<>();
+
+        students.add(new Student(236, "Grant Golding", "59 Wakehurst St. Gibsonia, PA 15044"));
+        students.add(new Student(224, "Ben Dale", "342 South Mechanic Ave. Murfreesboro, TN 37128"));
+        students.add(new Student(117, "Leia Rice", "804 Saxon Dr., Blackwood, NJ 08012"));
+        students.add(new Student(142, "Christina Barrera", "24 East Street, Lincoln Park, MI 48146"));
+        students.add(new Student(103, "Zachery Cortez", "91 South Lilac Street, Livingston, NJ 07039"));
+        students.add(new Student(363, "Owain Buck", "9566 William Ave., Clifton, NJ 07011"));
+        students.add(new Student(495, "Effie Copeland", "530 S. Jockey Hollow Court, Raleigh, NC 27603"));
+        students.add(new Student(291, "Freddie Mcintyre", "126 Halifax St., Phoenix, AZ 85021"));
+        students.add(new Student(292, "Avery Thompson", "732 Willow Lane, Orlando, FL 32803"));
+        students.add(new Student(293, "Jordan Bennett", "184 Maple Ave., Denver, CO 80203"));
+
+        selectionSort(students, new CompName());
+        System.out.println("Students sorted by name:");
+        for (Student s : students) {
+            s.display();
+        }
+
+        selectionSort(students, new CompRollNo());
+        System.out.println("\nStudents sorted by roll number:");
+        for (Student s : students) {
+            s.display();
+        }
+    }
+
+    public static void selectionSort(ArrayList<Student> students, Comparator<Student> comparator) {
+        int n = students.size();
+
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+
+            for (int j = i + 1; j < n; j++) {
+                if (comparator.compare(students.get(j), students.get(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+            Student temp = students.get(minIndex);
+            students.set(minIndex, students.get(i));
+            students.set(i, temp);
+        }
+    }
+}
